@@ -69,6 +69,11 @@
 						<i class="icon-folder-open icon-large"></i>life
 					</a>
                   </li>
+                                <li >
+                    <a href="http://rogerarm.github.io/category/technology.html">
+						<i class="icon-folder-open icon-large"></i>technology
+					</a>
+                  </li>
               
                           <ul class="nav pull-right">
                                 <li><a href="http://rogerarm.github.io/archives.html"><i class="icon-th-list"></i>Archives</a></li>
@@ -98,8 +103,7 @@
 
 
 </footer><!-- /.post-info --></div>
-                <div class="summary"><h1>博客搭建后的自述</h1>
-<hr />
+                <div class="summary"><hr />
 <p>以前一直想建立个自己的博客网站，但一直太忙，刚好最近两天有空，就折腾了一番。</p>
 <p>使用了github的二级域名和Pelican的博客框架，感觉还是挺好玩的，唯一遗憾的就是在本地安装markdown编辑软件的时候迟迟没有成功，郁闷了好久，后来索性就直接用在线编辑器stackedit了，也免去了以后升级的麻烦，现在看看还挺好。</p>
 <p>第一篇博客，也不写那么多了，希望以后能有空一直写下去，作为一种爱好吧。</p>
@@ -121,8 +125,7 @@
 
 
 </footer><!-- /.post-info --></div>
-                <div class="summary"><h1>github的历程</h1>
-<hr />
+                <div class="summary"><hr />
 <p>记得刚开github帐号的时候是研二的时候，觉得好奇就注册了个帐号，但是后来对这个帐号也没有发布具体的开源项目。</p>
 <p>在学校的时候一直忙于实验室的项目，也没有时间写点自己喜欢的东西。后来暑假的时候有空就把自己平时使用C++写的一个网页抓取程序传入到github了，虽然很简单，但是总算填补了github上没有具体贡献的空洞了。</p>
 <p>后来到了研三终于有点空了，当时也是看到搭建的github上的博客，觉得好奇就自己使用Pelican模板建立了一个，刚建立后还是很开心的，终于有了自己的博客了。</p>
@@ -130,6 +133,45 @@
 <p>自14年3月份参加工作后，觉得自己慢慢的变懒了，相比学生时代的好学精神的确差了很多。</p>
 <p>工作这段时间对分布式数据库的思考比较多，如分布式事务，checkpoint，undo/redo，备份恢复，高可用，负载均衡等。传统数据库的基本理论还是挺高深的，所以一直想抽点时间出来总结一下，但是一直没有空，这次决定不管多忙都写的心得吧，希望一个星期可以总结一次。</p>
                         <a class="btn primary xsmall" href="http://rogerarm.github.io/githubde-li-cheng.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+                <div class="article">
+                <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-shi-wu-chu-li.html">数据库中的事务处理</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-07-12T00:00:00">
+        <i class="icon-calendar"></i>日 12 七月 2015
+</abbr>
+<span class="label">By</span>
+<a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
+<span class="label">Category</span>
+<a href="http://rogerarm.github.io/category/technology.html"><i class="icon-folder-open"></i>technology</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><hr />
+<p>事务处理是传统关系型数据库中至关重要的特性之一，通俗的讲就是当数据库在一个事务内的一组SQL要么全部执行成功要么全部执行失败，不能出现一个事务内有的SQL执行成功，有的执行SQL执行失败。这样才可以保证事务的一致性，典型的例子就是通常大家所有的银行转账系统。</p>
+<p>与事务相关的通常有以下几个概念: ACID , CAP , 事物隔离级别下面将先介绍ACID与CAP定义，后面将介绍事务的隔离级别。</p>
+<ol>
+<li>ACID</li>
+</ol>
+<blockquote>
+<p>A：原子性（Atomicity）</p>
+<h6>整个事务中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。</h6>
+<p>C：一致性（Consistency）</p>
+<h6>在事务开始之前和事务结束以后，数据库的完整性约束没有被破坏。</h6>
+<p>I：隔离性（Isolation）</p>
+<h6>隔离状态执行事务，使它们好像是系统在给定时间内执行的唯一操作。如果有两个事务，运行在相同的时间内，执行相同的功能，事务的隔离性将确保每一事务在系统中认为只有该事务在使用系统。这种属性有时称为串行化，为了防止事务操作间的混淆，必须串行化或序列化请求，使得在同一时间仅有一个请求用于同一数据。</h6>
+<p>D：持久性（Durability）</p>
+<h6>在事务完成以后，该事务所对数据库所作的更改便持久的保存在数据库之中，并不会被回滚。</h6>
+</blockquote>
+<ol>
+<li>CAP</li>
+</ol>
+<blockquote>
+<p>C ...</p></blockquote>
+                        <a class="btn primary xsmall" href="http://rogerarm.github.io/shu-ju-ku-zhong-de-shi-wu-chu-li.html">more ...</a>
                 </div>
         </div>
         <hr />
@@ -146,6 +188,7 @@
 <li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
 <li><a href="http://rogerarm.github.io/" rel="alternate"><i class="icon-bookmark icon-large"></i>atom feed</a></li>
     <li><a href="https://github.com/rogerarm/"><i class="icon-Github-sign icon-large"></i>Github</a></li>
+    <li><a href="https://cn.linkedin.com/in/zhangguoqiang"><i class="icon-Linkedin-sign icon-large"></i>Linkedin</a></li>
     <li><a href="http://weibo.com/rogerarm"><i class="icon-Weibo-sign icon-large"></i>Weibo</a></li>
     <li><a href="http://bbs.byr.cn/#!board/Job"><i class="icon-Byr-sign icon-large"></i>Byr</a></li>
 
@@ -153,6 +196,11 @@
 <li>
 <a href="http://rogerarm.github.io/category/life.html">
     <i class="icon-folder-open icon-large"></i>life
+</a>
+</li>
+<li>
+<a href="http://rogerarm.github.io/category/technology.html">
+    <i class="icon-folder-open icon-large"></i>technology
 </a>
 </li>
 

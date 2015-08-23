@@ -189,6 +189,31 @@
         </div>
         <hr />
                 <div class="article">
+                <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-full-page-write.html">数据库中的full page write</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-08-23T00:00:00">
+        <i class="icon-calendar"></i>日 23 八月 2015
+</abbr>
+<span class="label">By</span>
+<a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
+<span class="label">Category</span>
+<a href="http://rogerarm.github.io/category/technology.html"><i class="icon-folder-open"></i>technology</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><hr />
+<p>在传统关系型数据库中有一个功能称为full page write，这个功能是为了避免机械磁盘在写的时候无法保证原子性而设计的，也可以认为是一个古老的功能，但是其思想值得借鉴。以下以PostgreSQL数据库的实现为例子解释这一设计思想。</p>
+<p>假设每次写事务日志时都有一个唯一的标记称为LSN，它顺序增长，假设用不完。我们在写每条日志时头部都有LSN标记。</p>
+<p>当数据库系统运行时，如果此时系统正在刷写页面（假设page大小为8KB）时系统断电，当该服务器使用的磁盘不带电池时，磁盘刷写数据只能保证512B字节的原子性（因为磁盘的一个扇区是512B） 。 因此此时可能造成一个页面中只有页头的512B刷写到磁盘上，而剩下的数据未更新，此时如果系统启动重新恢复过程中，首先会判断该LSN是否比恢复日志中的LSN大，如果大表示页面数据为未来的，即跳过恢复。然而此时页面数据因为不具有原子性并不是最新，导致数据出现不一致。</p>
+<p>解决这个问题的一个方法就是在每次checkpoint之后，如果读取的一个页面是第一次读取，更改该页面时，也就是写更新该页面xlog日志时把整个页面写入xlog中，如果在后面宕机再恢复时无条件将该页面替换磁盘上的页面，因为此时磁盘上的页面可能无法保证页面的原子性。而后面的日志恢复过程中，可能刷坏的页面已经被替换掉，LSN的判断也不可能出现错误，因此可以有效的解决该问题。</p>
+<p>该方法的一个缺陷就是可能会造成xlog日志文件很大，在主备同步过程中，网络传输的日志过多，造成性能下降。</p>
+<p>然而在现代数据库系统中使用的磁盘通常可能带电池，而可以保证写page的原子性，因此该功能通常可以关闭。并且未来可能会使用更高端的存储介质，比如SSD或NVRAM，性能将是机械磁盘的几个数量级。但是该问题的解决方案还是值得借鉴的，在我们无法保证磁盘上页面数据最新并且完整时，可以使用该full page ...</p>
+                        <a class="btn primary xsmall" href="http://rogerarm.github.io/shu-ju-ku-zhong-de-full-page-write.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+                <div class="article">
                 <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-shi-wu-chu-li.html">数据库中的事务处理</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>

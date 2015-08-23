@@ -118,6 +118,30 @@
         </div>
         <hr />
                 <div class="article">
+                <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-checkpoint.html">数据库中的checkpoint</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-08-23T00:00:00">
+        <i class="icon-calendar"></i>日 23 八月 2015
+</abbr>
+<span class="label">By</span>
+<a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
+<span class="label">Category</span>
+<a href="http://rogerarm.github.io/category/technology.html"><i class="icon-folder-open"></i>technology</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><hr />
+<p>在上一篇博客中我们讲到目前大众型的关系型数据库都采用了WAL思想，就是将page的更新只在内存中操作，并记录相应的事务日志，提交事务时保证事务日志先提交。</p>
+<p>然而我们可以考虑这里面的一个问题，就是装载page的内存容量到底要设多大才合适，工程中服务器的内存是有限的，假设设置为4GB大小，那么这4GB用完了怎么办呢？还有就是我们记录的事务日志（假设称其为xlog）多久才删除呢？</p>
+<p>这便涉及到另一个通常使用的思想叫checkpoint，目前大部分的关系型数据库都会使用这一技术。简而言之就是当到一定时候我们就把内存中的数据全部刷盘，然后删除这个时间点之前的所有xlog，因为这个时间点所有的内存数据都刷到磁盘了，之前的这些xlog已经不需要恢复了，下次系统如果出现异常，数据库系统便可以从最近一次checkpoint点来启动恢复，重新redo回内存中的这些操作。</p>
+<p>使用这个方法便便可以保证数据库系统可以循环并正常的运行了，通常checkpoint启动可以受xlog个数，时间，业务线程的请求等等控制。并且系统在做checkpoint时会将大量的page fsync到磁盘，因此此时的IO量很大，通常此时性能不好，使用TPCC测试时可以看到tpmc的曲线在这个点出现明显的下降。</p>
+<p>解决这个问题的一个方法就是系统中可以再运行一个后台线程，慢慢的整理内存中的page数据，将没有弄脏的page扔掉，慢慢的刷写一些page，可以腾出一些内存空间，以防数据库的内存空间因为满了而导致系统性能下降，也可以降低checkpoint启动时造成的系统性能下降的时间窗。</p>
+                        <a class="btn primary xsmall" href="http://rogerarm.github.io/shu-ju-ku-zhong-de-checkpoint.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+                <div class="article">
                 <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-wal.html">数据库中的WAL</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>

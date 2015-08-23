@@ -137,6 +137,34 @@
         </div>
         <hr />
                 <div class="article">
+                <h1><a href="http://rogerarm.github.io/shi-wu-ge-chi-ji-bie.html">事务隔离级别</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-08-23T00:00:00">
+        <i class="icon-calendar"></i>日 23 八月 2015
+</abbr>
+<span class="label">By</span>
+<a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
+<span class="label">Category</span>
+<a href="http://rogerarm.github.io/category/technology.html"><i class="icon-folder-open"></i>technology</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><hr />
+<p>在数据库系统中，如果每个并发操作都是原子的，就好比如果都是
+<code>set a = 3;</code>
+这类的简单操作，那么数据库系统中不需要锁或隔离级别来控制并发，因为它本身就是原子的。</p>
+<p>但是数据库中有一个重要的个功能叫事务，就是可以将多个操作定义为一个事务块，这个事务块要么都成功，要么都失败。这样就加大了数据库在并发时的复杂性。</p>
+<p>解决这个问题的一种方法就是每个单元都加互斥锁，让每个事务串行的进行下去，这就是串行化隔离级别。</p>
+<p>这种方法明显性能不好，无法保证数据库系统的大并发功能。我们可以思考如果把互斥锁改为读写锁，这样在读上可以并发，这是一个性能的提升。使用读写锁时，有两种情况：第一种是读读并发，读读并发可能会造成幻读的情况，这就是可重复读隔离级别。第二种是不仅可以读读并发，还可以读写并发，就是读锁可被升级为写锁，读写并发时不满足可重复读，这就是读已提交隔离级别。</p>
+<p>然后还有一种方法就是只在写时加锁，这样可以实现读读并发，读写并发，写读并发，写读并发过程中会造成脏读，这类隔离级别通常称为读未提交。</p>
+<p>在SQL92标准中定义了这四种隔离级别，即为读未提交，读已提交，可重复读，串行化。</p>
+<p>需要特别注意，这四种隔离级别只是SQL92标准中定义的四个概念。当时数据库的隔离级别实现方式主要是通过锁。并且这个意义上的锁应该是行级锁，这样才有了幻读，可重复读，脏读这些概念 ...</p>
+                        <a class="btn primary xsmall" href="http://rogerarm.github.io/shi-wu-ge-chi-ji-bie.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+                <div class="article">
                 <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-shi-wu-chu-li.html">数据库中的事务处理</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Roger</title>
+    <title>事务隔离级别</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Roger">
@@ -69,7 +69,7 @@
 						<i class="icon-folder-open icon-large"></i>life
 					</a>
                   </li>
-                                <li >
+                                <li class="active">
                     <a href="http://rogerarm.github.io/category/technology.html">
 						<i class="icon-folder-open icon-large"></i>technology
 					</a>
@@ -90,18 +90,87 @@
       <div class="row">
         <div class="span9" id="content">
             <section id="content">
-<h1>Archives for Roger</h1>
+        <article>
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to 事务隔离级别">
+                                        事务隔离级别
+                                </a>
+                                                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
+                        <footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-08-23T00:00:00">
+        <i class="icon-calendar"></i>日 23 八月 2015
+</abbr>
+<span class="label">By</span>
+<a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
+<span class="label">Category</span>
+<a href="http://rogerarm.github.io/category/technology.html"><i class="icon-folder-open"></i>technology</a>.
 
-<dl>
-	<dt>日 23 八月 2015</dt>
-	<dd><a href='shi-wu-ge-chi-ji-bie.html'>事务隔离级别</a></dd>
-	<dt>日 12 七月 2015</dt>
-	<dd><a href='shu-ju-ku-zhong-de-shi-wu-chu-li.html'>数据库中的事务处理</a></dd>
-	<dt>日 05 七月 2015</dt>
-	<dd><a href='githubde-li-cheng.html'>github的历程</a></dd>
-	<dt>日 01 九月 2013</dt>
-	<dd><a href='gang-gang-jian-li-de-bo-ke.html'>刚刚建立的博客</a></dd>
-</dl>
+
+</footer><!-- /.post-info -->                </div>
+                <hr />
+<p>在数据库系统中，如果每个并发操作都是原子的，就好比如果都是
+<code>set a = 3;</code>
+这类的简单操作，那么数据库系统中不需要锁或隔离级别来控制并发，因为它本身就是原子的。</p>
+<p>但是数据库中有一个重要的个功能叫事务，就是可以将多个操作定义为一个事务块，这个事务块要么都成功，要么都失败。这样就加大了数据库在并发时的复杂性。</p>
+<p>解决这个问题的一种方法就是每个单元都加互斥锁，让每个事务串行的进行下去，这就是串行化隔离级别。</p>
+<p>这种方法明显性能不好，无法保证数据库系统的大并发功能。我们可以思考如果把互斥锁改为读写锁，这样在读上可以并发，这是一个性能的提升。使用读写锁时，有两种情况：第一种是读读并发，读读并发可能会造成幻读的情况，这就是可重复读隔离级别。第二种是不仅可以读读并发，还可以读写并发，就是读锁可被升级为写锁，读写并发时不满足可重复读，这就是读已提交隔离级别。</p>
+<p>然后还有一种方法就是只在写时加锁，这样可以实现读读并发，读写并发，写读并发，写读并发过程中会造成脏读，这类隔离级别通常称为读未提交。</p>
+<p>在SQL92标准中定义了这四种隔离级别，即为读未提交，读已提交，可重复读，串行化。</p>
+<p>需要特别注意，这四种隔离级别只是SQL92标准中定义的四个概念。当时数据库的隔离级别实现方式主要是通过锁。并且这个意义上的锁应该是行级锁，这样才有了幻读，可重复读，脏读这些概念。而如今数据库多采用snapshot的方式来实现MVCC（多版本并发），通过获取snapshot的方式来区别这四种隔离级别。</p>
+<p>个人认为在使用snapshot方式时，在一个事务中,如果获取多次snapshot则可实现对应的读已提交；如果只在事务开始时只获取一次snapshot则可实现可重复读和串行化，这类情况实现的可重复读和串行化好像没有区别，都能满足定义的基本要求。这个仅仅是个人理解，如果有不同意见大家可以留言一起讨论下。</p>
+<p>下面再介绍几个事务中相关的概念：</p>
+<p>1 读未提交（Read Uncommitted）</p>
+<blockquote>
+<h6>一个事务在执行过程中可以看到其他事务没有提交的新插入的记录，而且能看到其他事务没有提交的对已有记录的更新。</h6>
+</blockquote>
+<p>2 读已提交（Read Commited）</p>
+<blockquote>
+<h6>一个事务在执行过程中可以看到其他事务已经提交的新插入的记录，而且能看到其他事务已经提交的对已有记录的更新。</h6>
+</blockquote>
+<p>3 可重复读（Repeatable Read）</p>
+<blockquote>
+<h6>一个事务在执行过程中可以看到其他事务已经提交的新插入的记录，但是不能看到其他其他事务对已有记录的更新。</h6>
+</blockquote>
+<p>4 串行化（Serializable）</p>
+<blockquote>
+<h6>一个事务在执行过程中完全看不到其他事务对数据库所做的更新（事务执行的时候不允许别的事务并发执行，事务串行化执行，事务只能一个接着一个地执行，而不能并发执行）。</h6>
+</blockquote>
+<p>5 脏读</p>
+<blockquote>
+<h6>一个事务读到另一个事务未提交的更新数据（A和B事务并发执行，B事务执行更新后，A事务查询B事务没有提交的数据，B事务回滚，则A事务得到的数据不是数据库中的真实数据。也就是脏数据，即和数据库中不一致的数据）。</h6>
+</blockquote>
+<p>6 不可重复读</p>
+<blockquote>
+<h6>一个事务在执行过程中完全看不到其他事务对数据库所做的更新（事务执行的时候不允许别的事务并发执行，事务串行化执行，事务只能一个接着一个地执行，而不能并发执行）。</h6>
+<h6>不可重复读中有个特例，叫覆盖更新，是指一个事务覆盖另一个事务已提交的更新数据（即A事务更新数据，然后B事务更新该数据，A事务查询发现自己更新的数据变了）。</h6>
+</blockquote>
+<p>7 虚读（幻读）</p>
+<blockquote>
+<h6>一个事务读到另一个事务已提交的新插入的数据（A和B事务并发执行，A事务查询数据，B事务插入或者删除数据，A事务再次查询发现结果集中有以前没有的数据或者以前有的数据消失了）。</h6>
+</blockquote>
+                </div><!-- /.entry-content -->
+                                <div class="comments">
+                <h2>Comments !</h2>
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                           var disqus_identifier = "shi-wu-ge-chi-ji-bie.html";
+                           (function() {
+                                var dsq = document.createElement('script');
+                                dsq.type = 'text/javascript'; dsq.async = true;
+                                dsq.src = 'http://rogerarm.disqus.com/embed.js';
+                                (document.getElementsByTagName('head')[0] ||
+                                 document.getElementsByTagName('body')[0]).appendChild(dsq);
+                          })();
+                        </script>
+                </div>
+                        </article>
 </section>
         </div><!--/span-->
 

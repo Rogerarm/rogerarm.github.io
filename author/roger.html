@@ -203,6 +203,32 @@
                 </div>
         </div>
         <hr />
+                <div class="article">
+                <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-wal.html">数据库中的WAL</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-08-23T00:00:00">
+        <i class="icon-calendar"></i>日 23 八月 2015
+</abbr>
+<span class="label">By</span>
+<a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
+<span class="label">Category</span>
+<a href="http://rogerarm.github.io/category/technology.html"><i class="icon-folder-open"></i>technology</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><hr />
+<p>在数据库系统中，通常大家会讨论到WAL，其称为write-ahead log，预写式日志。是目前传统关系型数据库中提升事务提交性能的一种常用方法。</p>
+<p>在描述WAL之前，我们先讨论下数据库存储的实现方式。</p>
+<p>在计算机系统刚刚萌芽期间，人们希望可以将一些结构化数据（比如一张表数据）存储起来，并且具有永久性。通常的做法就是将这些数据一行一行的写入一个文件，当想使用时便打开一行一行读取，当然写入和打开都是通过程序让计算机去操作。当数据操作不是很频繁时，这样不失为一种好方法。</p>
+<p>然而如果数据在频繁的做操作，每次读取磁盘和写入磁盘都是非常耗时的。那么人们便想，CPU操作内存的速度是操作磁盘速度的几十甚至几百倍，能不能将数据按页面划分，将这些页面读取到内存中，每次数据库系统在更新时都直接更新内存中的数据页面，而不用每次去读写磁盘。</p>
+<p>然而当系统一直运行正常的时候，性能固然是很好，但是一旦系统出现异常宕机时，内存中的数据便永久丢失，这在数据库系统中是绝对不允许的。解决这个问题的方法就是每次在提交事务之前记录事务日志，并且将事务日志刷到磁盘上后再提交事务。这样便保证了即使系统宕机，再次启动的时候数据库也可以从事务日志中恢复内存中的数据，这便是WAL，这些日志通常也被称为redo日志。</p>
+<p>可能大家会有个疑问，同样都是要fsync到磁盘，写wal与写page有什么区别呢？这便涉及机械磁盘中一个随机IO与顺序IO的问题。写wal时是所有事务日志都写到一个文件中，最后fsync到磁盘就可以。而写page时会涉及到不同表和不同page的文件，因此需要随机的写磁盘上不同位置，这样在机械磁盘的实现上是相对较慢的。</p>
+<p>使用写事务日志来代替频繁的读写磁盘，可以提升数据库的并发性能，因此wal也是关系型数据库乃至其它新型分布式系统中一种常用的技术。</p>
+                        <a class="btn primary xsmall" href="http://rogerarm.github.io/shu-ju-ku-zhong-de-wal.html">more ...</a>
+                </div>
+        </div>
+        <hr />
         
                         </div><!--/span-->
 

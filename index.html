@@ -90,6 +90,38 @@
       <div class="row">
         <div class="span9" id="content">
                             <div class="article">
+                <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-high-availability.html">数据库中的High availability</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-08-24T00:00:00">
+        <i class="icon-calendar"></i>一 24 八月 2015
+</abbr>
+<span class="label">By</span>
+<a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
+<span class="label">Category</span>
+<a href="http://rogerarm.github.io/category/technology.html"><i class="icon-folder-open"></i>technology</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><hr />
+<p>在传统关系型数据库中有一个非常重要的特性就是high availability，简称高可用。简而言之就是如果一台服务器坏了，仍然系统要保证可用性，通常的实现方式有以下几种，</p>
+<blockquote>
+<h5>1： 使用一主一备或多备的方式来同步数据；</h5>
+<h5>2： 使用共享磁阵的方式共享数据；</h5>
+<h5>3： 使用分布式文件系统来保证数据的安全；</h5>
+</blockquote>
+<p>本篇博客只探讨单机数据库中的高可用，对于分布式数据库中的高可用可以到下次再探讨。</p>
+<p>通常单机数据库采用方法1来实现high availability，一台服务器作为主机，另一台作为热备。主机实时将事务日志xlog同步给备机，备机将日志写盘后回复主机写入的位置（例如LSN，一个uint64位顺序递增数值，并假设它永远用不完），主机将事务等待队列中小于该LSN的事务全部提交。</p>
+<p>主备复制流程如图1所示：</p>
+<div class="highlight"><pre><span class="n">Note</span> <span class="n">left</span> <span class="n">of</span> <span class="n">Primary</span><span class="o">:</span> <span class="n">start</span> <span class="n">transaction</span>
+<span class="n">Note</span> <span class="n">left</span> <span class="n">of</span> <span class="n">Primary</span><span class="o">:</span> <span class="n">flush</span> <span class="n">xlog</span> <span class="n">to</span> <span class="n">disk</span>
+<span class="n">Primary</span><span class="o">-&gt;</span><span class="n">Standby</span><span class="o">:</span> <span class="n">send</span> <span class="n">xlog</span> <span class="n">to</span> <span class="n">Standby</span>
+<span class="n">Note</span> <span class="n">right</span> <span class="n">of</span> <span class="n">Standby</span><span class="o">:</span> <span class="n">flush ...</span></pre></div>
+                        <a class="btn primary xsmall" href="http://rogerarm.github.io/shu-ju-ku-zhong-de-high-availability.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+                <div class="article">
                 <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-full-page-write.html">数据库中的full page write</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -284,10 +316,9 @@
                 <div class="span3 well sidebar-nav" id="sidebar">
             <ul class="nav nav-list">
 <li class="nav-header"><h4><i class="icon-external-link"></i>blogroll</h4></li>
-    <li><a href="http://getpelican.com/"><i class="icon-external-link"></i>Pelican</a></li>
-    <li><a href="http://python.org/"><i class="icon-external-link"></i>Python.org</a></li>
-    <li><a href="http://www.qq.com/"><i class="icon-external-link"></i>QQ</a></li>
     <li><a href="https://www.google.com.hk/"><i class="icon-external-link"></i>Google</a></li>
+    <li><a href="http://www.qq.com/"><i class="icon-external-link"></i>QQ</a></li>
+    <li><a href="http://lannis.github.io/"><i class="icon-external-link"></i>lannis</a></li>
 <li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
 <li><a href="http://rogerarm.github.io/" rel="alternate"><i class="icon-bookmark icon-large"></i>atom feed</a></li>
     <li><a href="https://github.com/rogerarm/"><i class="icon-Github-sign icon-large"></i>Github</a></li>

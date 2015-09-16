@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>github的历程</title>
+    <title>数据库中的High availability</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Roger">
@@ -64,12 +64,12 @@
           <div class="nav-collapse">
             <ul class="nav">
                                                                     <li class="divider-vertical"></li>
-                                              <li class="active">
+                                              <li >
                     <a href="http://rogerarm.github.io/category/life.html">
 						<i class="icon-folder-open icon-large"></i>life
 					</a>
                   </li>
-                                <li >
+                                <li class="active">
                     <a href="http://rogerarm.github.io/category/technology.html">
 						<i class="icon-folder-open icon-large"></i>technology
 					</a>
@@ -95,8 +95,8 @@
                         <h1>
                                 <a href=""
                                         rel="bookmark"
-                                        title="Permalink to github的历程">
-                                        github的历程
+                                        title="Permalink to 数据库中的High availability">
+                                        数据库中的High availability
                                 </a>
                                                         </h1>
                 </header>
@@ -104,29 +104,49 @@
                 <div class="well">
                         <footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2015-07-05T00:00:00">
-        <i class="icon-calendar"></i>日 05 七月 2015
+<abbr class="published" title="2015-08-24T00:00:00">
+        <i class="icon-calendar"></i>一 24 八月 2015
 </abbr>
 <span class="label">By</span>
 <a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
 <span class="label">Category</span>
-<a href="http://rogerarm.github.io/category/life.html"><i class="icon-folder-open"></i>life</a>.
+<a href="http://rogerarm.github.io/category/technology.html"><i class="icon-folder-open"></i>technology</a>.
 
 
 </footer><!-- /.post-info -->                </div>
                 <hr />
-<p>记得刚开github帐号的时候是研二的时候，觉得好奇就注册了个帐号，但是后来对这个帐号也没有发布具体的开源项目。</p>
-<p>在学校的时候一直忙于实验室的项目，也没有时间写点自己喜欢的东西。后来暑假的时候有空就把自己平时使用C++写的一个网页抓取程序传入到github了，虽然很简单，但是总算填补了github上没有具体贡献的空洞了。</p>
-<p>后来到了研三终于有点空了，当时也是看到搭建的github上的博客，觉得好奇就自己使用Pelican模板建立了一个，刚建立后还是很开心的，终于有了自己的博客了。</p>
-<p>本以为以后可以好好维护下的，谁知后来忙于找工作，毕业论文，学车，毕业，学生时代就这么匆匆的过去了。</p>
-<p>自14年3月份参加工作后，觉得自己慢慢的变懒了，相比学生时代的好学精神的确差了很多。</p>
-<p>工作这段时间对分布式数据库的思考比较多，如分布式事务，checkpoint，undo/redo，备份恢复，高可用，负载均衡等。传统数据库的基本理论还是挺高深的，所以一直想抽点时间出来总结一下，但是一直没有空，这次决定不管多忙都写的心得吧，希望一个星期可以总结一次。</p>
+<p>在传统关系型数据库中有一个非常重要的特性就是high availability，简称高可用。简而言之就是如果一台服务器坏了，仍然系统要保证可用性，通常的实现方式有以下几种，</p>
+<blockquote>
+<h5>1： 使用一主一备或多备的方式来同步数据；</h5>
+<h5>2： 使用共享磁阵的方式共享数据；</h5>
+<h5>3： 使用分布式文件系统来保证数据的安全；</h5>
+</blockquote>
+<p>本篇博客只探讨单机数据库中的高可用，对于分布式数据库中的高可用可以到下次再探讨。</p>
+<p>通常单机数据库采用方法1来实现high availability，一台服务器作为主机，另一台作为热备。主机实时将事务日志xlog同步给备机，备机将日志写盘后回复主机写入的位置（例如LSN，一个uint64位顺序递增数值，并假设它永远用不完），主机将事务等待队列中小于该LSN的事务全部提交。</p>
+<p>主备复制流程如图1所示：</p>
+<div class="highlight"><pre><span class="n">Note</span> <span class="n">left</span> <span class="n">of</span> <span class="n">Primary</span><span class="o">:</span> <span class="n">start</span> <span class="n">transaction</span>
+<span class="n">Note</span> <span class="n">left</span> <span class="n">of</span> <span class="n">Primary</span><span class="o">:</span> <span class="n">flush</span> <span class="n">xlog</span> <span class="n">to</span> <span class="n">disk</span>
+<span class="n">Primary</span><span class="o">-&gt;</span><span class="n">Standby</span><span class="o">:</span> <span class="n">send</span> <span class="n">xlog</span> <span class="n">to</span> <span class="n">Standby</span>
+<span class="n">Note</span> <span class="n">right</span> <span class="n">of</span> <span class="n">Standby</span><span class="o">:</span> <span class="n">flush</span> <span class="n">xlog</span> <span class="n">to</span> <span class="n">disk</span>
+<span class="n">Standby</span><span class="o">-&gt;</span><span class="n">Primary</span><span class="o">:</span> <span class="n">reply</span> <span class="n">xlog</span> <span class="n">location</span> <span class="n">to</span> <span class="n">Primary</span>
+<span class="n">Note</span> <span class="n">left</span> <span class="n">of</span> <span class="n">Primary</span><span class="o">:</span> <span class="n">commit</span> <span class="n">transaction</span>
+</pre></div>
+
+
+<p>使用主备方案时，通常会有一套第三方的集群管理软件来监测主备机的状态，当主机宕机时，第三方集群管理软件可以将备机升主，使业务做到不间断。
+这样看是完美，然而如果第三方集群管理软件一旦与主机网络断连，误以为主机宕机，让备机升主，此时出现双主，然而由图1可知，主机开始一个事务是先刷写xlog，再发送给备机，当出现双主时，两个主机均会写下日志，此时这一对主备的xlog便出现不一致，即使重启一个主机将其设为备机也无法与新主机同步，因为已经有不一样的xlog日志了。
+在PostgreSQL与MySQL数据库中经常会遇到这类问题。当主备设置为同步模式时，可以避免数据一致性的问题，因为没有备机写事务无法提交。</p>
+<p>解决这个问题的方法有两个：</p>
+<blockquote>
+<h5>1： 修改主机写xlog的顺序，当主机将一个事务产生的xlog发送到备机后，自己再flush磁盘，这样便可以避免双主后的主备xlog不一致。</h5>
+<h5>2： 将备机进行重建，重建分为两种，一种是全量重建，如果主机数据量很大时，全量重建将非常耗时，这并不符合高可用的理念；另一种是增量重建，就是将双主中不一样的xlog开始分析，以一个主机为准，将另一个主机中不一样的xlog进行undo。以PostgreSQL为例，它并没有日志undo机制，因此这个问题在PostgreSQL中一直是个难题。然而最近发布的PG9.5版本中增加了一个工具pg_rewind，可以使用增量build的方式来解决双主的问题。</h5>
+</blockquote>
                 </div><!-- /.entry-content -->
                                 <div class="comments">
                 <h2>Comments !</h2>
                         <div id="disqus_thread"></div>
                         <script type="text/javascript">
-                           var disqus_identifier = "githubde-li-cheng.html";
+                           var disqus_identifier = "shu-ju-ku-zhong-de-high-availability.html";
                            (function() {
                                 var dsq = document.createElement('script');
                                 dsq.type = 'text/javascript'; dsq.async = true;

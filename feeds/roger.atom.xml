@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Roger</title><link href="http://rogerarm.github.io/" rel="alternate"></link><link href="http://rogerarm.github.io/feeds/roger.atom.xml" rel="self"></link><id>http://rogerarm.github.io/</id><updated>2015-08-24T00:00:00+02:00</updated><entry><title>数据库中的High availability</title><link href="http://rogerarm.github.io/shu-ju-ku-zhong-de-high-availability.html" rel="alternate"></link><updated>2015-08-24T00:00:00+02:00</updated><author><name>Roger</name></author><id>tag:rogerarm.github.io,2015-08-24:shu-ju-ku-zhong-de-high-availability.html</id><summary type="html">&lt;hr /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Roger</title><link href="http://rogerarm.github.io/" rel="alternate"></link><link href="http://rogerarm.github.io/feeds/roger.atom.xml" rel="self"></link><id>http://rogerarm.github.io/</id><updated>2015-12-31T00:00:00+01:00</updated><entry><title>2015年历程与感悟</title><link href="http://rogerarm.github.io/2015nian-li-cheng-yu-gan-wu.html" rel="alternate"></link><updated>2015-12-31T00:00:00+01:00</updated><author><name>Roger</name></author><id>tag:rogerarm.github.io,2015-12-31:2015nian-li-cheng-yu-gan-wu.html</id><summary type="html">&lt;hr /&gt;
+&lt;p&gt;一年很快又结束了，以前一直没有写总结的习惯，一年过去了，感觉也没有留下什么。于是今年特此写篇总结，记录下这一年的点点滴滴，再思考下明年的期望。&lt;/p&gt;
+&lt;h1&gt;生活&lt;/h1&gt;
+&lt;p&gt;今年的生活比较简单，简单到回想一年，只能想起工作和回家两件事。在帝都工作的人也许都这样，生活节奏太快。今年锻炼也比较少，去年有时还和地总去奥体游泳，今年自从地总找了个女友后，找我除了帮他办事以外，绝对没有第二件事，对他是彻底无语。一直想去奥森公园锻炼的，也没有去过，希望明年可以加强下锻炼。&lt;/p&gt;
+&lt;p&gt;周围结婚的同学越来越多了，打开朋友圈，不是婚纱照就是密月照。很多同学的婚礼也没来的及参加，感到非常的遗憾。&lt;/p&gt;
+&lt;h1&gt;工作&lt;/h1&gt;
+&lt;p&gt;首先非常荣幸，又在我司平安的渡过了第二个元旦。以前一直不信，工作再累也不会过劳死，来到我司后，发现一切皆有可能。&lt;/p&gt;
+&lt;p&gt;相比于去年，今年的工作更加忙了。仔细回想，技术上没有太大长进，对我司的推拉扯（推动，拉通，扯皮）文化倒是理解的刻骨铭心。以前开个会说话还吞吞吐吐，现在就算屁事没有，拉一个会也能扯上半小时。&lt;/p&gt;
+&lt;p&gt;今年对技术方面的书看的不多，主要还是查找资料，和大家交流。如果说去年一年是对分布式数据库产品有个入门的了解，那么今年可以说对大数据生态有了个入门的概念。好比别人说什么hadoop, hbase, hive, spark,pig等这些名词的时候能扯上一二。&lt;/p&gt;
+&lt;p&gt;交流和沟通能力上还是有了一点提高，以前做一件事总是一个人闷头搞，知道的太少，也不知道别人在做啥，问了别人给你讲也听不懂。现在基本上谁在做啥都能扯两句。英语交流能力有了一点突破，以前和印度人沟通都是共享个屏幕，然后两个人开始打字，感觉特别囧，后来这种方式效率实在太低，完全不符合我司快节奏的氛围，于是只能硬着头皮说几句简单的口语，虽然很烂，但还好大家能互相听懂一二。以后还是要多多练习，慢慢提高，毕竟口语是基本能力。&lt;/p&gt;
+&lt;p&gt;明年在技术上希望能对数据库有个更加深层次的理解，很多机制还需要学习，真心希望有这个时间。&lt;/p&gt;
+&lt;h1&gt;博客&lt;/h1&gt;
+&lt;p&gt;今年年中的时候终于捡起了github博客，两年没有维护了，年中时写了几篇博客，但还是太少，下半年实在太忙，完全没有这个精力，希望明年能写更多，养成一个善于总结与记录的好习惯。还有就是这个博客主题太丑了，毕竟过了两年，一直想换也没空。&lt;/p&gt;
+&lt;h1&gt;兴趣&lt;/h1&gt;
+&lt;p&gt;今年也没培养起什么好的兴趣，除了没事听听音乐就是看看电视，一直想看看非技术类书的愿望也没有实现，希望明年能有个好的开始。&lt;/p&gt;
+&lt;h1&gt;旅游&lt;/h1&gt;
+&lt;p&gt;今年也没怎么出去过旅游，本打算和家人一起去韩国的，结果也因为签证太晚而被抛弃，仅限于在帝都周边的地区逛逛。希望明年可以安排一次有意思的旅游。&lt;/p&gt;
+&lt;h1&gt;展望&lt;/h1&gt;
+&lt;p&gt;总结今年就这么平平淡淡的过去了，工作的第二年，很快将进入第三年了，希望新的一年里更加美好。&lt;/p&gt;</summary></entry><entry><title>数据库中的High availability</title><link href="http://rogerarm.github.io/shu-ju-ku-zhong-de-high-availability.html" rel="alternate"></link><updated>2015-08-24T00:00:00+02:00</updated><author><name>Roger</name></author><id>tag:rogerarm.github.io,2015-08-24:shu-ju-ku-zhong-de-high-availability.html</id><summary type="html">&lt;hr /&gt;
 &lt;p&gt;在传统关系型数据库中有一个非常重要的特性就是high availability，简称高可用。简而言之就是如果一台服务器坏了，仍然系统要保证可用性，通常的实现方式有以下几种，&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;h5&gt;1： 使用一主一备或多备的方式来同步数据；&lt;/h5&gt;

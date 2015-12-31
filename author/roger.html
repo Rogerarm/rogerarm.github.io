@@ -47,7 +47,7 @@
     <link rel="apple-touch-icon" sizes="114x114" href="http://rogerarm.github.io/theme/images/apple-touch-icon-114x114.png">
 
     <link href="http://rogerarm.github.io/" type="application/atom+xml" rel="alternate" title="Roger ATOM Feed" />
-    
+
   </head>
 
   <body>
@@ -63,18 +63,18 @@
           <a class="brand" href="http://rogerarm.github.io/index.html">Roger </a>
           <div class="nav-collapse">
             <ul class="nav">
-                                                                    <li class="divider-vertical"></li>
-                                              <li >
+                          <li class="divider-vertical"></li>
+                  <li >
                     <a href="http://rogerarm.github.io/category/life.html">
 						<i class="icon-folder-open icon-large"></i>life
 					</a>
                   </li>
-                                <li >
+                  <li >
                     <a href="http://rogerarm.github.io/category/technology.html">
 						<i class="icon-folder-open icon-large"></i>technology
 					</a>
                   </li>
-              
+
                           <ul class="nav pull-right">
                                 <li><a href="http://rogerarm.github.io/archives.html"><i class="icon-th-list"></i>Archives</a></li>
                           </ul>
@@ -89,58 +89,118 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
-                            <div class="article">
-                <h1><a href="http://rogerarm.github.io/gang-gang-jian-li-de-bo-ke.html">刚刚建立的博客</a></h1>
+        <div class="article">
+                <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-high-availability.html">数据库中的High availability</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2013-09-01T00:00:00">
-        <i class="icon-calendar"></i>日 01 九月 2013
+<abbr class="published" title="2015-08-24T00:00:00+02:00">
+        <i class="icon-calendar"></i>一 24 八月 2015
 </abbr>
 <span class="label">By</span>
 <a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
 <span class="label">Category</span>
-<a href="http://rogerarm.github.io/category/life.html"><i class="icon-folder-open"></i>life</a>.
+<a href="http://rogerarm.github.io/category/technology.html"><i class="icon-folder-open"></i>technology</a>.
 
 
 </footer><!-- /.post-info --></div>
                 <div class="summary"><hr />
-<p>以前一直想建立个自己的博客网站，但一直太忙，刚好最近两天有空，就折腾了一番。</p>
-<p>使用了github的二级域名和Pelican的博客框架，感觉还是挺好玩的，唯一遗憾的就是在本地安装markdown编辑软件的时候迟迟没有成功，郁闷了好久，后来索性就直接用在线编辑器stackedit了，也免去了以后升级的麻烦，现在看看还挺好。</p>
-<p>第一篇博客，也不写那么多了，希望以后能有空一直写下去，作为一种爱好吧。</p>
-                        <a class="btn primary xsmall" href="http://rogerarm.github.io/gang-gang-jian-li-de-bo-ke.html">more ...</a>
+<p>在传统关系型数据库中有一个非常重要的特性就是high availability，简称高可用。简而言之就是如果一台服务器坏了，仍然系统要保证可用性，通常的实现方式有以下几种，</p>
+<blockquote>
+<h5>1： 使用一主一备或多备的方式来同步数据；</h5>
+<h5>2： 使用共享磁阵的方式共享数据；</h5>
+<h5>3： 使用分布式文件系统来保证数据的安全；</h5>
+</blockquote>
+<p>本篇博客只探讨单机数据库中的高可用，对于分布式数据库中的高可用可以到下次再探讨。</p>
+<p>通常单机数据库采用方法1来实现high availability，一台服务器作为主机，另一台作为热备。主机实时将事务日志xlog同步给备机，备机将日志写盘后回复主机写入的位置（例如LSN，一个uint64位顺序递增数值，并假设它永远用不完），主机将事务等待队列中小于该LSN的事务全部提交。</p>
+<p>主备复制流程如图1所示：</p>
+<div class="highlight"><pre><span class="n">Note</span> <span class="n">left</span> <span class="n">of</span> <span class="n">Primary</span><span class="o">:</span> <span class="n">start</span> <span class="n">transaction</span>
+<span class="n">Note</span> <span class="n">left</span> <span class="n">of</span> <span class="n">Primary</span><span class="o">:</span> <span class="n">flush</span> <span class="n">xlog</span> <span class="n">to</span> <span class="n">disk</span>
+<span class="n">Primary</span><span class="o">-&gt;</span><span class="n">Standby</span><span class="o">:</span> <span class="n">send</span> <span class="n">xlog</span> <span class="n">to</span> <span class="n">Standby</span>
+<span class="n">Note</span> <span class="n">right</span> <span class="n">of</span> <span class="n">Standby</span><span class="o">:</span> <span class="n">flush ...</pre></div>
+                        <a class="btn primary xsmall" href="http://rogerarm.github.io/shu-ju-ku-zhong-de-high-availability.html">more ...</a>
                 </div>
         </div>
         <hr />
-                <div class="article">
-                <h1><a href="http://rogerarm.github.io/githubde-li-cheng.html">github的历程</a></h1>
+        <div class="article">
+                <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-full-page-write.html">数据库中的full page write</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2015-07-05T00:00:00">
-        <i class="icon-calendar"></i>日 05 七月 2015
+<abbr class="published" title="2015-08-09T00:00:00+02:00">
+        <i class="icon-calendar"></i>日 09 八月 2015
 </abbr>
 <span class="label">By</span>
 <a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
 <span class="label">Category</span>
-<a href="http://rogerarm.github.io/category/life.html"><i class="icon-folder-open"></i>life</a>.
+<a href="http://rogerarm.github.io/category/technology.html"><i class="icon-folder-open"></i>technology</a>.
 
 
 </footer><!-- /.post-info --></div>
                 <div class="summary"><hr />
-<p>记得刚开github帐号的时候是研二的时候，觉得好奇就注册了个帐号，但是后来对这个帐号也没有发布具体的开源项目。</p>
-<p>在学校的时候一直忙于实验室的项目，也没有时间写点自己喜欢的东西。后来暑假的时候有空就把自己平时使用C++写的一个网页抓取程序传入到github了，虽然很简单，但是总算填补了github上没有具体贡献的空洞了。</p>
-<p>后来到了研三终于有点空了，当时也是看到搭建的github上的博客，觉得好奇就自己使用Pelican模板建立了一个，刚建立后还是很开心的，终于有了自己的博客了。</p>
-<p>本以为以后可以好好维护下的，谁知后来忙于找工作，毕业论文，学车，毕业，学生时代就这么匆匆的过去了。</p>
-<p>自14年3月份参加工作后，觉得自己慢慢的变懒了，相比学生时代的好学精神的确差了很多。</p>
-<p>工作这段时间对分布式数据库的思考比较多，如分布式事务，checkpoint，undo/redo，备份恢复，高可用，负载均衡等。传统数据库的基本理论还是挺高深的，所以一直想抽点时间出来总结一下，但是一直没有空，这次决定不管多忙都写的心得吧，希望一个星期可以总结一次。</p>
-                        <a class="btn primary xsmall" href="http://rogerarm.github.io/githubde-li-cheng.html">more ...</a>
+<p>在传统关系型数据库中有一个功能称为full page write，这个功能是为了避免机械磁盘在写的时候无法保证原子性而设计的，也可以认为是一个古老的功能，但是其思想值得借鉴。以下以PostgreSQL数据库的实现为例子解释这一设计思想。</p>
+<p>假设每次写事务日志时都有一个唯一的标记称为LSN，它顺序增长，假设用不完。我们在写每条日志时头部都有LSN标记。</p>
+<p>当数据库系统运行时，如果此时系统正在刷写页面（假设page大小为8KB）时系统断电，当该服务器使用的磁盘不带电池时，磁盘刷写数据只能保证512B字节的原子性（因为磁盘的一个扇区是512B） 。 因此此时可能造成一个页面中只有页头的512B刷写到磁盘上，而剩下的数据未更新，此时如果系统启动重新恢复过程中，首先会判断该LSN是否比恢复日志中的LSN大，如果大表示页面数据为未来的，即跳过恢复。然而此时页面数据因为不具有原子性并不是最新，导致数据出现不一致。</p>
+<p>解决这个问题的一个方法就是在每次checkpoint之后，如果读取的一个页面是第一次读取，更改该页面时，也就是写更新该页面xlog日志时把整个页面写入xlog中，如果在后面宕机再恢复时无条件将该页面替换磁盘上的页面，因为此时磁盘上的页面可能无法保证页面的原子性。而后面的日志恢复过程中，可能刷坏的页面已经被替换掉，LSN的判断也不可能出现错误，因此可以有效的解决该问题。</p>
+<p>该方法的一个缺陷就是可能会造成xlog日志文件很大，在主备同步过程中，网络传输的日志过多，造成性能下降。</p>
+<p>然而在现代数据库系统中使用的磁盘通常可能带电池，而可以保证写page的原子性，因此该功能通常可以关闭。并且未来可能会使用更高端的存储介质，比如SSD或NVRAM，性能将是机械磁盘的几个数量级。但是该问题的解决方案还是值得借鉴的，在我们无法保证磁盘上页面数据最新并且完整时，可以使用该full page ...</p>
+                        <a class="btn primary xsmall" href="http://rogerarm.github.io/shu-ju-ku-zhong-de-full-page-write.html">more ...</a>
                 </div>
         </div>
         <hr />
-                <div class="article">
+        <div class="article">
+                <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-checkpoint.html">数据库中的checkpoint</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-08-02T00:00:00+02:00">
+        <i class="icon-calendar"></i>日 02 八月 2015
+</abbr>
+<span class="label">By</span>
+<a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
+<span class="label">Category</span>
+<a href="http://rogerarm.github.io/category/technology.html"><i class="icon-folder-open"></i>technology</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><hr />
+<p>在上一篇博客中我们讲到目前大众型的关系型数据库都采用了WAL思想，就是将page的更新只在内存中操作，并记录相应的事务日志，提交事务时保证事务日志先提交。</p>
+<p>然而我们可以考虑这里面的一个问题，就是装载page的内存容量到底要设多大才合适，工程中服务器的内存是有限的，假设设置为4GB大小，那么这4GB用完了怎么办呢？还有就是我们记录的事务日志（假设称其为xlog）多久才删除呢？</p>
+<p>这便涉及到另一个通常使用的思想叫checkpoint，目前大部分的关系型数据库都会使用这一技术。简而言之就是当到一定时候我们就把内存中的数据全部刷盘，然后删除这个时间点之前的所有xlog，因为这个时间点所有的内存数据都刷到磁盘了，之前的这些xlog已经不需要恢复了，下次系统如果出现异常，数据库系统便可以从最近一次checkpoint点来启动恢复，重新redo回内存中的这些操作。</p>
+<p>使用这个方法便便可以保证数据库系统可以循环并正常的运行了，通常checkpoint启动可以受xlog个数，时间，业务线程的请求等等控制。并且系统在做checkpoint时会将大量的page fsync到磁盘，因此此时的IO量很大，通常此时性能不好，使用TPCC测试时可以看到tpmc的曲线在这个点出现明显的下降。</p>
+<p>解决这个问题的一个方法就是系统中可以再运行一个后台线程，慢慢的整理内存中的page数据，将没有弄脏的page扔掉，慢慢的刷写一些page，可以腾出一些内存空间，以防数据库的内存空间因为满了而导致系统性能下降，也可以降低checkpoint启动时造成的系统性能下降的时间窗。</p>
+                        <a class="btn primary xsmall" href="http://rogerarm.github.io/shu-ju-ku-zhong-de-checkpoint.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-wal.html">数据库中的WAL</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-07-26T00:00:00+02:00">
+        <i class="icon-calendar"></i>日 26 七月 2015
+</abbr>
+<span class="label">By</span>
+<a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
+<span class="label">Category</span>
+<a href="http://rogerarm.github.io/category/technology.html"><i class="icon-folder-open"></i>technology</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><hr />
+<p>在数据库系统中，通常大家会讨论到WAL，其称为write-ahead log，预写式日志。是目前传统关系型数据库中提升事务提交性能的一种常用方法。</p>
+<p>在描述WAL之前，我们先讨论下数据库存储的实现方式。</p>
+<p>在计算机系统刚刚萌芽期间，人们希望可以将一些结构化数据（比如一张表数据）存储起来，并且具有永久性。通常的做法就是将这些数据一行一行的写入一个文件，当想使用时便打开一行一行读取，当然写入和打开都是通过程序让计算机去操作。当数据操作不是很频繁时，这样不失为一种好方法。</p>
+<p>然而如果数据在频繁的做操作，每次读取磁盘和写入磁盘都是非常耗时的。那么人们便想，CPU操作内存的速度是操作磁盘速度的几十甚至几百倍，能不能将数据按页面划分，将这些页面读取到内存中，每次数据库系统在更新时都直接更新内存中的数据页面，而不用每次去读写磁盘。</p>
+<p>然而当系统一直运行正常的时候，性能固然是很好，但是一旦系统出现异常宕机时，内存中的数据便永久丢失，这在数据库系统中是绝对不允许的。解决这个问题的方法就是每次在提交事务之前记录事务日志，并且将事务日志刷到磁盘上后再提交事务。这样便保证了即使系统宕机，再次启动的时候数据库也可以从事务日志中恢复内存中的数据，这便是WAL，这些日志通常也被称为redo日志。</p>
+<p>可能大家会有个疑问，同样都是要fsync到磁盘，写wal与写page有什么区别呢？这便涉及机械磁盘中一个随机IO与顺序IO的问题。写wal时是所有事务日志都写到一个文件中，最后fsync到磁盘就可以。而写page时会涉及到不同表和不同page的文件，因此需要随机的写磁盘上不同位置，这样在机械磁盘的实现上是相对较慢的。</p>
+<p>使用写事务日志来代替频繁的读写磁盘，可以提升数据库的并发性能，因此wal也是关系型数据库乃至其它新型分布式系统中一种常用的技术。</p>
+                        <a class="btn primary xsmall" href="http://rogerarm.github.io/shu-ju-ku-zhong-de-wal.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="http://rogerarm.github.io/shi-wu-ge-chi-ji-bie.html">事务隔离级别</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2015-07-19T00:00:00">
+<abbr class="published" title="2015-07-19T00:00:00+02:00">
         <i class="icon-calendar"></i>日 19 七月 2015
 </abbr>
 <span class="label">By</span>
@@ -164,92 +224,11 @@
                 </div>
         </div>
         <hr />
-                <div class="article">
-                <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-checkpoint.html">数据库中的checkpoint</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2015-08-02T00:00:00">
-        <i class="icon-calendar"></i>日 02 八月 2015
-</abbr>
-<span class="label">By</span>
-<a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
-<span class="label">Category</span>
-<a href="http://rogerarm.github.io/category/technology.html"><i class="icon-folder-open"></i>technology</a>.
-
-
-</footer><!-- /.post-info --></div>
-                <div class="summary"><hr />
-<p>在上一篇博客中我们讲到目前大众型的关系型数据库都采用了WAL思想，就是将page的更新只在内存中操作，并记录相应的事务日志，提交事务时保证事务日志先提交。</p>
-<p>然而我们可以考虑这里面的一个问题，就是装载page的内存容量到底要设多大才合适，工程中服务器的内存是有限的，假设设置为4GB大小，那么这4GB用完了怎么办呢？还有就是我们记录的事务日志（假设称其为xlog）多久才删除呢？</p>
-<p>这便涉及到另一个通常使用的思想叫checkpoint，目前大部分的关系型数据库都会使用这一技术。简而言之就是当到一定时候我们就把内存中的数据全部刷盘，然后删除这个时间点之前的所有xlog，因为这个时间点所有的内存数据都刷到磁盘了，之前的这些xlog已经不需要恢复了，下次系统如果出现异常，数据库系统便可以从最近一次checkpoint点来启动恢复，重新redo回内存中的这些操作。</p>
-<p>使用这个方法便便可以保证数据库系统可以循环并正常的运行了，通常checkpoint启动可以受xlog个数，时间，业务线程的请求等等控制。并且系统在做checkpoint时会将大量的page fsync到磁盘，因此此时的IO量很大，通常此时性能不好，使用TPCC测试时可以看到tpmc的曲线在这个点出现明显的下降。</p>
-<p>解决这个问题的一个方法就是系统中可以再运行一个后台线程，慢慢的整理内存中的page数据，将没有弄脏的page扔掉，慢慢的刷写一些page，可以腾出一些内存空间，以防数据库的内存空间因为满了而导致系统性能下降，也可以降低checkpoint启动时造成的系统性能下降的时间窗。</p>
-                        <a class="btn primary xsmall" href="http://rogerarm.github.io/shu-ju-ku-zhong-de-checkpoint.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-                <div class="article">
-                <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-full-page-write.html">数据库中的full page write</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2015-08-09T00:00:00">
-        <i class="icon-calendar"></i>日 09 八月 2015
-</abbr>
-<span class="label">By</span>
-<a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
-<span class="label">Category</span>
-<a href="http://rogerarm.github.io/category/technology.html"><i class="icon-folder-open"></i>technology</a>.
-
-
-</footer><!-- /.post-info --></div>
-                <div class="summary"><hr />
-<p>在传统关系型数据库中有一个功能称为full page write，这个功能是为了避免机械磁盘在写的时候无法保证原子性而设计的，也可以认为是一个古老的功能，但是其思想值得借鉴。以下以PostgreSQL数据库的实现为例子解释这一设计思想。</p>
-<p>假设每次写事务日志时都有一个唯一的标记称为LSN，它顺序增长，假设用不完。我们在写每条日志时头部都有LSN标记。</p>
-<p>当数据库系统运行时，如果此时系统正在刷写页面（假设page大小为8KB）时系统断电，当该服务器使用的磁盘不带电池时，磁盘刷写数据只能保证512B字节的原子性（因为磁盘的一个扇区是512B） 。 因此此时可能造成一个页面中只有页头的512B刷写到磁盘上，而剩下的数据未更新，此时如果系统启动重新恢复过程中，首先会判断该LSN是否比恢复日志中的LSN大，如果大表示页面数据为未来的，即跳过恢复。然而此时页面数据因为不具有原子性并不是最新，导致数据出现不一致。</p>
-<p>解决这个问题的一个方法就是在每次checkpoint之后，如果读取的一个页面是第一次读取，更改该页面时，也就是写更新该页面xlog日志时把整个页面写入xlog中，如果在后面宕机再恢复时无条件将该页面替换磁盘上的页面，因为此时磁盘上的页面可能无法保证页面的原子性。而后面的日志恢复过程中，可能刷坏的页面已经被替换掉，LSN的判断也不可能出现错误，因此可以有效的解决该问题。</p>
-<p>该方法的一个缺陷就是可能会造成xlog日志文件很大，在主备同步过程中，网络传输的日志过多，造成性能下降。</p>
-<p>然而在现代数据库系统中使用的磁盘通常可能带电池，而可以保证写page的原子性，因此该功能通常可以关闭。并且未来可能会使用更高端的存储介质，比如SSD或NVRAM，性能将是机械磁盘的几个数量级。但是该问题的解决方案还是值得借鉴的，在我们无法保证磁盘上页面数据最新并且完整时，可以使用该full page ...</p>
-                        <a class="btn primary xsmall" href="http://rogerarm.github.io/shu-ju-ku-zhong-de-full-page-write.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-                <div class="article">
-                <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-high-availability.html">数据库中的High availability</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2015-08-24T00:00:00">
-        <i class="icon-calendar"></i>一 24 八月 2015
-</abbr>
-<span class="label">By</span>
-<a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
-<span class="label">Category</span>
-<a href="http://rogerarm.github.io/category/technology.html"><i class="icon-folder-open"></i>technology</a>.
-
-
-</footer><!-- /.post-info --></div>
-                <div class="summary"><hr />
-<p>在传统关系型数据库中有一个非常重要的特性就是high availability，简称高可用。简而言之就是如果一台服务器坏了，仍然系统要保证可用性，通常的实现方式有以下几种，</p>
-<blockquote>
-<h5>1： 使用一主一备或多备的方式来同步数据；</h5>
-<h5>2： 使用共享磁阵的方式共享数据；</h5>
-<h5>3： 使用分布式文件系统来保证数据的安全；</h5>
-</blockquote>
-<p>本篇博客只探讨单机数据库中的高可用，对于分布式数据库中的高可用可以到下次再探讨。</p>
-<p>通常单机数据库采用方法1来实现high availability，一台服务器作为主机，另一台作为热备。主机实时将事务日志xlog同步给备机，备机将日志写盘后回复主机写入的位置（例如LSN，一个uint64位顺序递增数值，并假设它永远用不完），主机将事务等待队列中小于该LSN的事务全部提交。</p>
-<p>主备复制流程如图1所示：</p>
-<div class="highlight"><pre><span class="n">Note</span> <span class="n">left</span> <span class="n">of</span> <span class="n">Primary</span><span class="o">:</span> <span class="n">start</span> <span class="n">transaction</span>
-<span class="n">Note</span> <span class="n">left</span> <span class="n">of</span> <span class="n">Primary</span><span class="o">:</span> <span class="n">flush</span> <span class="n">xlog</span> <span class="n">to</span> <span class="n">disk</span>
-<span class="n">Primary</span><span class="o">-&gt;</span><span class="n">Standby</span><span class="o">:</span> <span class="n">send</span> <span class="n">xlog</span> <span class="n">to</span> <span class="n">Standby</span>
-<span class="n">Note</span> <span class="n">right</span> <span class="n">of</span> <span class="n">Standby</span><span class="o">:</span> <span class="n">flush ...</span></pre></div>
-                        <a class="btn primary xsmall" href="http://rogerarm.github.io/shu-ju-ku-zhong-de-high-availability.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-                <div class="article">
+        <div class="article">
                 <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-shi-wu-chu-li.html">数据库中的事务处理</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2015-07-12T00:00:00">
+<abbr class="published" title="2015-07-12T00:00:00+02:00">
         <i class="icon-calendar"></i>日 12 七月 2015
 </abbr>
 <span class="label">By</span>
@@ -284,37 +263,58 @@
                 </div>
         </div>
         <hr />
-                <div class="article">
-                <h1><a href="http://rogerarm.github.io/shu-ju-ku-zhong-de-wal.html">数据库中的WAL</a></h1>
+        <div class="article">
+                <h1><a href="http://rogerarm.github.io/githubde-li-cheng.html">github的历程</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2015-07-26T00:00:00">
-        <i class="icon-calendar"></i>日 26 七月 2015
+<abbr class="published" title="2015-07-05T00:00:00+02:00">
+        <i class="icon-calendar"></i>日 05 七月 2015
 </abbr>
 <span class="label">By</span>
 <a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
 <span class="label">Category</span>
-<a href="http://rogerarm.github.io/category/technology.html"><i class="icon-folder-open"></i>technology</a>.
+<a href="http://rogerarm.github.io/category/life.html"><i class="icon-folder-open"></i>life</a>.
 
 
 </footer><!-- /.post-info --></div>
                 <div class="summary"><hr />
-<p>在数据库系统中，通常大家会讨论到WAL，其称为write-ahead log，预写式日志。是目前传统关系型数据库中提升事务提交性能的一种常用方法。</p>
-<p>在描述WAL之前，我们先讨论下数据库存储的实现方式。</p>
-<p>在计算机系统刚刚萌芽期间，人们希望可以将一些结构化数据（比如一张表数据）存储起来，并且具有永久性。通常的做法就是将这些数据一行一行的写入一个文件，当想使用时便打开一行一行读取，当然写入和打开都是通过程序让计算机去操作。当数据操作不是很频繁时，这样不失为一种好方法。</p>
-<p>然而如果数据在频繁的做操作，每次读取磁盘和写入磁盘都是非常耗时的。那么人们便想，CPU操作内存的速度是操作磁盘速度的几十甚至几百倍，能不能将数据按页面划分，将这些页面读取到内存中，每次数据库系统在更新时都直接更新内存中的数据页面，而不用每次去读写磁盘。</p>
-<p>然而当系统一直运行正常的时候，性能固然是很好，但是一旦系统出现异常宕机时，内存中的数据便永久丢失，这在数据库系统中是绝对不允许的。解决这个问题的方法就是每次在提交事务之前记录事务日志，并且将事务日志刷到磁盘上后再提交事务。这样便保证了即使系统宕机，再次启动的时候数据库也可以从事务日志中恢复内存中的数据，这便是WAL，这些日志通常也被称为redo日志。</p>
-<p>可能大家会有个疑问，同样都是要fsync到磁盘，写wal与写page有什么区别呢？这便涉及机械磁盘中一个随机IO与顺序IO的问题。写wal时是所有事务日志都写到一个文件中，最后fsync到磁盘就可以。而写page时会涉及到不同表和不同page的文件，因此需要随机的写磁盘上不同位置，这样在机械磁盘的实现上是相对较慢的。</p>
-<p>使用写事务日志来代替频繁的读写磁盘，可以提升数据库的并发性能，因此wal也是关系型数据库乃至其它新型分布式系统中一种常用的技术。</p>
-                        <a class="btn primary xsmall" href="http://rogerarm.github.io/shu-ju-ku-zhong-de-wal.html">more ...</a>
+<p>记得刚开github帐号的时候是研二的时候，觉得好奇就注册了个帐号，但是后来对这个帐号也没有发布具体的开源项目。</p>
+<p>在学校的时候一直忙于实验室的项目，也没有时间写点自己喜欢的东西。后来暑假的时候有空就把自己平时使用C++写的一个网页抓取程序传入到github了，虽然很简单，但是总算填补了github上没有具体贡献的空洞了。</p>
+<p>后来到了研三终于有点空了，当时也是看到搭建的github上的博客，觉得好奇就自己使用Pelican模板建立了一个，刚建立后还是很开心的，终于有了自己的博客了。</p>
+<p>本以为以后可以好好维护下的，谁知后来忙于找工作，毕业论文，学车，毕业，学生时代就这么匆匆的过去了。</p>
+<p>自14年3月份参加工作后，觉得自己慢慢的变懒了，相比学生时代的好学精神的确差了很多。</p>
+<p>工作这段时间对分布式数据库的思考比较多，如分布式事务，checkpoint，undo/redo，备份恢复，高可用，负载均衡等。传统数据库的基本理论还是挺高深的，所以一直想抽点时间出来总结一下，但是一直没有空，这次决定不管多忙都写的心得吧，希望一个星期可以总结一次。</p>
+                        <a class="btn primary xsmall" href="http://rogerarm.github.io/githubde-li-cheng.html">more ...</a>
                 </div>
         </div>
         <hr />
-        
-                        </div><!--/span-->
+        <div class="article">
+                <h1><a href="http://rogerarm.github.io/gang-gang-jian-li-de-bo-ke.html">刚刚建立的博客</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-09-01T00:00:00+02:00">
+        <i class="icon-calendar"></i>日 01 九月 2013
+</abbr>
+<span class="label">By</span>
+<a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
+<span class="label">Category</span>
+<a href="http://rogerarm.github.io/category/life.html"><i class="icon-folder-open"></i>life</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><hr />
+<p>以前一直想建立个自己的博客网站，但一直太忙，刚好最近两天有空，就折腾了一番。</p>
+<p>使用了github的二级域名和Pelican的博客框架，感觉还是挺好玩的，唯一遗憾的就是在本地安装markdown编辑软件的时候迟迟没有成功，郁闷了好久，后来索性就直接用在线编辑器stackedit了，也免去了以后升级的麻烦，现在看看还挺好。</p>
+<p>第一篇博客，也不写那么多了，希望以后能有空一直写下去，作为一种爱好吧。</p>
+                        <a class="btn primary xsmall" href="http://rogerarm.github.io/gang-gang-jian-li-de-bo-ke.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+
+        </div><!--/span-->
 
                 <div class="span3 well sidebar-nav" id="sidebar">
-            <ul class="nav nav-list">
+<ul class="nav nav-list">
 <li class="nav-header"><h4><i class="icon-external-link"></i>blogroll</h4></li>
     <li><a href="https://www.google.com.hk/"><i class="icon-external-link"></i>Google</a></li>
     <li><a href="http://www.qq.com/"><i class="icon-external-link"></i>QQ</a></li>
@@ -360,7 +360,7 @@
     </div><!--/.fluid-container-->
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
 </script>
@@ -369,7 +369,7 @@ try {
 	var pageTracker = _gat._getTracker("UA-43673596-1");
 pageTracker._trackPageview();
 } catch(err) {}</script>
-        <script type="text/javascript">
+<script type="text/javascript">
     var disqus_shortname = 'rogerarm';
     (function () {
         var s = document.createElement('script'); s.async = true;

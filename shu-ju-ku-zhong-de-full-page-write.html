@@ -47,7 +47,7 @@
     <link rel="apple-touch-icon" sizes="114x114" href="http://rogerarm.github.io/theme/images/apple-touch-icon-114x114.png">
 
     <link href="http://rogerarm.github.io/" type="application/atom+xml" rel="alternate" title="Roger ATOM Feed" />
-    
+
   </head>
 
   <body>
@@ -63,18 +63,18 @@
           <a class="brand" href="http://rogerarm.github.io/index.html">Roger </a>
           <div class="nav-collapse">
             <ul class="nav">
-                                                                    <li class="divider-vertical"></li>
-                                              <li >
+                          <li class="divider-vertical"></li>
+                  <li >
                     <a href="http://rogerarm.github.io/category/life.html">
 						<i class="icon-folder-open icon-large"></i>life
 					</a>
                   </li>
-                                <li class="active">
+                  <li class="active">
                     <a href="http://rogerarm.github.io/category/technology.html">
 						<i class="icon-folder-open icon-large"></i>technology
 					</a>
                   </li>
-              
+
                           <ul class="nav pull-right">
                                 <li><a href="http://rogerarm.github.io/archives.html"><i class="icon-th-list"></i>Archives</a></li>
                           </ul>
@@ -89,7 +89,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
-            <section id="content">
+<section id="content">
         <article>
                 <header>
                         <h1>
@@ -98,13 +98,13 @@
                                         title="Permalink to 数据库中的full page write">
                                         数据库中的full page write
                                 </a>
-                                                        </h1>
+                        </h1>
                 </header>
                 <div class="entry-content">
                 <div class="well">
-                        <footer class="post-info">
+<footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2015-08-09T00:00:00">
+<abbr class="published" title="2015-08-09T00:00:00+02:00">
         <i class="icon-calendar"></i>日 09 八月 2015
 </abbr>
 <span class="label">By</span>
@@ -122,7 +122,7 @@
 <p>该方法的一个缺陷就是可能会造成xlog日志文件很大，在主备同步过程中，网络传输的日志过多，造成性能下降。</p>
 <p>然而在现代数据库系统中使用的磁盘通常可能带电池，而可以保证写page的原子性，因此该功能通常可以关闭。并且未来可能会使用更高端的存储介质，比如SSD或NVRAM，性能将是机械磁盘的几个数量级。但是该问题的解决方案还是值得借鉴的，在我们无法保证磁盘上页面数据最新并且完整时，可以使用该full page write思想，出现这个情况的场景比如时，并行恢复，数据页复制等等情况下。</p>
                 </div><!-- /.entry-content -->
-                                <div class="comments">
+                <div class="comments">
                 <h2>Comments !</h2>
                         <div id="disqus_thread"></div>
                         <script type="text/javascript">
@@ -136,12 +136,12 @@
                           })();
                         </script>
                 </div>
-                        </article>
+        </article>
 </section>
         </div><!--/span-->
 
                 <div class="span3 well sidebar-nav" id="sidebar">
-            <ul class="nav nav-list">
+<ul class="nav nav-list">
 <li class="nav-header"><h4><i class="icon-external-link"></i>blogroll</h4></li>
     <li><a href="https://www.google.com.hk/"><i class="icon-external-link"></i>Google</a></li>
     <li><a href="http://www.qq.com/"><i class="icon-external-link"></i>QQ</a></li>
@@ -187,7 +187,7 @@
     </div><!--/.fluid-container-->
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
 </script>
@@ -196,7 +196,7 @@ try {
 	var pageTracker = _gat._getTracker("UA-43673596-1");
 pageTracker._trackPageview();
 } catch(err) {}</script>
-        <script type="text/javascript">
+<script type="text/javascript">
     var disqus_shortname = 'rogerarm';
     (function () {
         var s = document.createElement('script'); s.async = true;

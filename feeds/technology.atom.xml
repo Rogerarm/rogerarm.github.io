@@ -1,25 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Roger</title><link href="http://rogerarm.github.io/" rel="alternate"></link><link href="http://rogerarm.github.io/feeds/roger.atom.xml" rel="self"></link><id>http://rogerarm.github.io/</id><updated>2016-11-13T00:00:00+01:00</updated><entry><title>change os test</title><link href="http://rogerarm.github.io/change-os-test.html" rel="alternate"></link><published>2016-11-13T00:00:00+01:00</published><author><name>Roger</name></author><id>tag:rogerarm.github.io,2016-11-13:change-os-test.html</id><summary type="html">&lt;hr /&gt;
-&lt;h1&gt;test&lt;/h1&gt;
-&lt;p&gt;2016.11.13 change os test.&lt;/p&gt;</summary></entry><entry><title>2015年历程与感悟</title><link href="http://rogerarm.github.io/2015nian-li-cheng-yu-gan-wu.html" rel="alternate"></link><published>2015-12-31T00:00:00+01:00</published><author><name>Roger</name></author><id>tag:rogerarm.github.io,2015-12-31:2015nian-li-cheng-yu-gan-wu.html</id><summary type="html">&lt;hr /&gt;
-&lt;p&gt;一年很快又结束了，以前一直没有写总结的习惯，一年过去了，感觉也没有留下什么。于是今年特此写篇总结，记录下这一年的点点滴滴，再思考下明年的期望。&lt;/p&gt;
-&lt;h1&gt;生活&lt;/h1&gt;
-&lt;p&gt;今年的生活比较简单，简单到回想一年，只能想起工作和回家两件事。在帝都工作的人也许都这样，生活节奏太快。今年锻炼也比较少，去年有时还和地总去奥体游泳，今年自从地总找了个女友后，找我除了帮他办事以外，绝对没有第二件事，对他是彻底无语。一直想去奥森公园锻炼的，也没有去过，希望明年可以加强下锻炼。&lt;/p&gt;
-&lt;p&gt;周围结婚的同学越来越多了，打开朋友圈，不是婚纱照就是密月照。很多同学的婚礼也没来的及参加，感到非常的遗憾。&lt;/p&gt;
-&lt;h1&gt;工作&lt;/h1&gt;
-&lt;p&gt;首先非常荣幸，又在我司平安的渡过了第二个元旦。以前一直不信，工作再累也不会过劳死，来到我司后，发现一切皆有可能。&lt;/p&gt;
-&lt;p&gt;相比于去年，今年的工作更加忙了。仔细回想，技术上没有太大长进，对我司的推拉扯（推动，拉通，扯皮）文化倒是理解的刻骨铭心。以前开个会说话还吞吞吐吐，现在就算屁事没有，拉一个会也能扯上半小时。&lt;/p&gt;
-&lt;p&gt;今年对技术方面的书看的不多，主要还是查找资料，和大家交流。如果说去年一年是对分布式数据库产品有个入门的了解，那么今年可以说对大数据生态有了个入门的概念。好比别人说什么hadoop, hbase, hive, spark,pig等这些名词的时候能扯上一二。&lt;/p&gt;
-&lt;p&gt;交流和沟通能力上还是有了一点提高，以前做一件事总是一个人闷头搞，知道的太少，也不知道别人在做啥，问了别人给你讲也听不懂。现在基本上谁在做啥都能扯两句。英语交流能力有了一点突破，以前和印度人沟通都是共享个屏幕，然后两个人开始打字，感觉特别囧，后来这种方式效率实在太低，完全不符合我司快节奏的氛围，于是只能硬着头皮说几句简单的口语，虽然很烂，但还好大家能互相听懂一二。以后还是要多多练习，慢慢提高，毕竟口语是基本能力。&lt;/p&gt;
-&lt;p&gt;明年在技术上希望能对数据库有个更加深层次的理解，很多机制还需要学习，真心希望有这个时间。&lt;/p&gt;
-&lt;h1&gt;博客&lt;/h1&gt;
-&lt;p&gt;今年年中的时候终于捡起了github博客，两年没有维护了，年中时写了几篇博客，但还是太少，下半年实在太忙，完全没有这个精力，希望明年能写更多，养成一个善于总结与记录的好习惯。还有就是这个博客主题太丑了，毕竟过了两年，一直想换也没空。&lt;/p&gt;
-&lt;h1&gt;兴趣&lt;/h1&gt;
-&lt;p&gt;今年也没培养起什么好的兴趣，除了没事听听音乐就是看看电视，一直想看看非技术类书的愿望也没有实现，希望明年能有个好的开始。&lt;/p&gt;
-&lt;h1&gt;旅游&lt;/h1&gt;
-&lt;p&gt;今年也没怎么出去过旅游，本打算和家人一起去韩国的，结果也因为签证太晚而被抛弃，仅限于在帝都周边的地区逛逛。希望明年可以安排一次有意思的旅游。&lt;/p&gt;
-&lt;h1&gt;展望&lt;/h1&gt;
-&lt;p&gt;总结今年就这么平平淡淡的过去了，工作的第二年，很快将进入第三年了，希望新的一年里更加美好。&lt;/p&gt;</summary></entry><entry><title>数据库中的High availability</title><link href="http://rogerarm.github.io/shu-ju-ku-zhong-de-high-availability.html" rel="alternate"></link><published>2015-08-24T00:00:00+02:00</published><author><name>Roger</name></author><id>tag:rogerarm.github.io,2015-08-24:shu-ju-ku-zhong-de-high-availability.html</id><summary type="html">&lt;hr /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Roger</title><link href="http://rogerarm.github.io/" rel="alternate"></link><link href="http://rogerarm.github.io/feeds/technology.atom.xml" rel="self"></link><id>http://rogerarm.github.io/</id><updated>2015-08-24T00:00:00+02:00</updated><entry><title>数据库中的High availability</title><link href="http://rogerarm.github.io/shu-ju-ku-zhong-de-high-availability.html" rel="alternate"></link><published>2015-08-24T00:00:00+02:00</published><author><name>Roger</name></author><id>tag:rogerarm.github.io,2015-08-24:shu-ju-ku-zhong-de-high-availability.html</id><summary type="html">&lt;hr /&gt;
 &lt;p&gt;在传统关系型数据库中有一个非常重要的特性就是high availability，简称高可用。简而言之就是如果一台服务器坏了，仍然系统要保证可用性，通常的实现方式有以下几种，&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;h5&gt;1： 使用一主一备或多备的方式来同步数据；&lt;/h5&gt;
@@ -130,13 +110,4 @@ Note left of Primary: commit transaction
 &lt;p&gt;P：分区容忍性（Partition-tolerance）&lt;/p&gt;
 &lt;h6&gt;系统应该能持续提供服务，即使系统内部有消息丢失（分区）&lt;/h6&gt;
 &lt;h5&gt;CAP理论在分布式系统中通常被证明为只能满足其二不可三者兼得。&lt;/h5&gt;
-&lt;/blockquote&gt;</summary></entry><entry><title>github的历程</title><link href="http://rogerarm.github.io/githubde-li-cheng.html" rel="alternate"></link><published>2015-07-05T00:00:00+02:00</published><author><name>Roger</name></author><id>tag:rogerarm.github.io,2015-07-05:githubde-li-cheng.html</id><summary type="html">&lt;hr /&gt;
-&lt;p&gt;记得刚开github帐号的时候是研二的时候，觉得好奇就注册了个帐号，但是后来对这个帐号也没有发布具体的开源项目。&lt;/p&gt;
-&lt;p&gt;在学校的时候一直忙于实验室的项目，也没有时间写点自己喜欢的东西。后来暑假的时候有空就把自己平时使用C++写的一个网页抓取程序传入到github了，虽然很简单，但是总算填补了github上没有具体贡献的空洞了。&lt;/p&gt;
-&lt;p&gt;后来到了研三终于有点空了，当时也是看到搭建的github上的博客，觉得好奇就自己使用Pelican模板建立了一个，刚建立后还是很开心的，终于有了自己的博客了。&lt;/p&gt;
-&lt;p&gt;本以为以后可以好好维护下的，谁知后来忙于找工作，毕业论文，学车，毕业，学生时代就这么匆匆的过去了。&lt;/p&gt;
-&lt;p&gt;自14年3月份参加工作后，觉得自己慢慢的变懒了，相比学生时代的好学精神的确差了很多。&lt;/p&gt;
-&lt;p&gt;工作这段时间对分布式数据库的思考比较多，如分布式事务，checkpoint，undo/redo，备份恢复，高可用，负载均衡等。传统数据库的基本理论还是挺高深的，所以一直想抽点时间出来总结一下，但是一直没有空，这次决定不管多忙都写的心得吧，希望一个星期可以总结一次。&lt;/p&gt;</summary></entry><entry><title>刚刚建立的博客</title><link href="http://rogerarm.github.io/gang-gang-jian-li-de-bo-ke.html" rel="alternate"></link><published>2013-09-01T00:00:00+02:00</published><author><name>Roger</name></author><id>tag:rogerarm.github.io,2013-09-01:gang-gang-jian-li-de-bo-ke.html</id><summary type="html">&lt;hr /&gt;
-&lt;p&gt;以前一直想建立个自己的博客网站，但一直太忙，刚好最近两天有空，就折腾了一番。&lt;/p&gt;
-&lt;p&gt;使用了github的二级域名和Pelican的博客框架，感觉还是挺好玩的，唯一遗憾的就是在本地安装markdown编辑软件的时候迟迟没有成功，郁闷了好久，后来索性就直接用在线编辑器stackedit了，也免去了以后升级的麻烦，现在看看还挺好。&lt;/p&gt;
-&lt;p&gt;第一篇博客，也不写那么多了，希望以后能有空一直写下去，作为一种爱好吧。&lt;/p&gt;</summary></entry></feed>
+&lt;/blockquote&gt;</summary></entry></feed>

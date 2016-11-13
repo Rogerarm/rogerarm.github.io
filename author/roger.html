@@ -90,6 +90,27 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
+                <h1><a href="http://rogerarm.github.io/change-os-test.html">change os test</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-11-13T00:00:00+01:00">
+        <i class="icon-calendar"></i>日 13 十一月 2016
+</abbr>
+<span class="label">By</span>
+<a href="http://rogerarm.github.io/author/roger.html"><i class="icon-user"></i>Roger</a>
+<span class="label">Category</span>
+<a href="http://rogerarm.github.io/category/life.html"><i class="icon-folder-open"></i>life</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><hr />
+<h1>test</h1>
+<p>2016.11.13 change os test.</p>
+                        <a class="btn primary xsmall" href="http://rogerarm.github.io/change-os-test.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="http://rogerarm.github.io/2015nian-li-cheng-yu-gan-wu.html">2015年历程与感悟</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -140,10 +161,10 @@
 <p>本篇博客只探讨单机数据库中的高可用，对于分布式数据库中的高可用可以到下次再探讨。</p>
 <p>通常单机数据库采用方法1来实现high availability，一台服务器作为主机，另一台作为热备。主机实时将事务日志xlog同步给备机，备机将日志写盘后回复主机写入的位置（例如LSN，一个uint64位顺序递增数值，并假设它永远用不完），主机将事务等待队列中小于该LSN的事务全部提交。</p>
 <p>主备复制流程如图1所示：</p>
-<div class="highlight"><pre><span class="n">Note</span> <span class="n">left</span> <span class="n">of</span> <span class="n">Primary</span><span class="o">:</span> <span class="n">start</span> <span class="n">transaction</span>
-<span class="n">Note</span> <span class="n">left</span> <span class="n">of</span> <span class="n">Primary</span><span class="o">:</span> <span class="n">flush</span> <span class="n">xlog</span> <span class="n">to</span> <span class="n">disk</span>
-<span class="n">Primary</span><span class="o">-&gt;</span><span class="n">Standby</span><span class="o">:</span> <span class="n">send</span> <span class="n">xlog</span> <span class="n">to</span> <span class="n">Standby</span>
-<span class="n">Note</span> <span class="n">right</span> <span class="n">of</span> <span class="n">Standby</span><span class="o">:</span> <span class="n">flush ...</pre></div>
+<div class="highlight"><pre><span></span>Note left of Primary: start transaction
+Note left of Primary: flush xlog to disk
+Primary-&gt;Standby: send xlog to Standby
+Note right of Standby: flush ...</pre></div>
                         <a class="btn primary xsmall" href="http://rogerarm.github.io/shu-ju-ku-zhong-de-high-availability.html">more ...</a>
                 </div>
         </div>
